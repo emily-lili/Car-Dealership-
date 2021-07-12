@@ -1,0 +1,18 @@
+INSERT INTO "Sales_person" (sales_person_id,first_name, last_name)
+VALUES (12345678,'Dory', 'Fish');
+
+INSERT INTO customer (customer_id,first_name, last_name, phone_number, adress)
+VALUES (22,'Nemo', 'Fish','2069996666' , '42 Wallaby Way');
+
+INSERT INTO invoice (involve_id,sale_price)
+VALUES('18',30000)
+
+INSERT INTO mechanic (mechanic_id,first_name, last_name)
+VALUES (10,'P', 'Sherman');
+
+INSERT INTO sold_cars(sold_cars_id,sales_person_id,customer_id,involve_id,make,model, year)
+VALUES(300,10,22,18,'Ferrari','CyberTruck',2021);
+
+INSERT INTO "Service_ticket" (sold_cars_id, mechanic_id, issue)
+VALUES (300, 10, 'Breakpads')
+

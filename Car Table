@@ -1,0 +1,69 @@
+CREATE TABLE "Sales_person" (
+  "Sales_person_id" Serial,
+  "first_name" VARCHAR(100),
+  "last_name" VARCHAR(100),
+  PRIMARY KEY ("Sales_person_id")
+);
+CREATE TABLE "customer" (
+  "customer_id" Serial,
+  "first_name" VARCHAR(100),
+  "last_name" VARCHAR(100),
+  "phone_number" INTEGER,
+  "adress" VARCHAR(150),
+  PRIMARY KEY ("customer_id")
+);
+CREATE TABLE "invoice" (
+  "invoice_id" Serial,
+  "sale_price" INTEGER,
+  PRIMARY KEY ("invoice_id")
+);
+CREATE TABLE "sold_cars" (
+  "sold_cars_id" Serial,
+  "sales_person_id" INTEGER,
+  "customer_id" INTEGER,
+  "involve_id" INTEGER,
+  "model" VARCHAR(100),
+  "color" VARCHAR(100),
+  "year" VARCHAR(100),
+  "make" VARCHAR(100),
+  "mileage" VARCHAR(100),
+  "commercial" VARCHAR(100),
+  PRIMARY KEY ("sold_cars_id"),
+  CONSTRAINT "FK_sold_cars.sales_person_id"
+    FOREIGN KEY ("sales_person_id")
+      REFERENCES "Sales_person"("Sales_person_id"),
+  CONSTRAINT "FK_sold_cars.customer_id"
+    FOREIGN KEY ("customer_id")
+      REFERENCES "customer"("customer_id"),
+  CONSTRAINT "FK_sold_cars.involve_id"
+    FOREIGN KEY ("involve_id")
+      REFERENCES "invoice"("invoice_id")
+);
+CREATE TABLE "mechanic" (
+  "mechanic_id" SERIAL,
+  "first_name" VARCHAR(100),
+  "last_name" VARCHAR(100),
+  PRIMARY KEY ("mechanic_id")
+);
+CREATE TABLE "Service_ticket" (
+  "service_id" SERIAL,
+  "sold_cars_id" INTEGER,
+  "mechanic_id" INTEGER,
+  "issue" VARCHAR(100),
+  PRIMARY KEY ("service_id"),
+  CONSTRAINT "FK_Service_ticket.mechanic_id"
+    FOREIGN KEY ("mechanic_id")
+      REFERENCES "mechanic"("mechanic_id"),
+  CONSTRAINT "FK_Service_ticket.sold_cars_id"
+    FOREIGN KEY ("sold_cars_id")
+      REFERENCES "sold_cars"("sold_cars_id")
+);
+CREATE TABLE "used_part" (
+  "part_id" SERIAL,
+  "service_ticket_id" INTEGER,
+  "part" VARCHAR(100),
+  PRIMARY KEY ("part_id"),
+  CONSTRAINT "FK_used_part.service_ticket_id"
+    FOREIGN KEY ("service_ticket_id")
+      REFERENCES "Service_ticket"("service_id")
+);
